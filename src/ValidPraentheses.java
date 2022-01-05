@@ -5,13 +5,13 @@ import java.util.Stack;
 public class ValidPraentheses {
 
     public static void main(String[] args) {
-        System.out.println(isValid("([){]}()"));
+        System.out.println(isValid("(){}}{"));
 
-        String s = "12345";
-        String s2 = "1234";
-        char c = s.charAt(2);
-        System.out.println(s.length()%2);
-        System.out.println(s2.length()%2);
+//        String s = "12345";
+//        String s2 = "1234";
+//        char c = s.charAt(2);
+//        System.out.println(s.length()%2);
+//        System.out.println(s2.length()%2);
     }
 
     private static boolean isValid(String s) {
@@ -30,14 +30,20 @@ public class ValidPraentheses {
             {
                 record.push(x);
             }
-            else if (record.size() == 0 && (x == ')' || x == ']' || x == '}' ))
+            else
             {
-                return false;
+                if (record.size() == 0)
+                {
+                    return false;
+                }
+
+                else if (pairs.get(x) != record.pop())
+                {
+                    return false;
+                }
+
             }
-            else if (record.size()>0 && pairs.get(x) != record.pop())
-            {
-                return false;
-            }
+
 
         }
 
@@ -45,6 +51,8 @@ public class ValidPraentheses {
         {
             return true;
         }
+
+
 
 
 
