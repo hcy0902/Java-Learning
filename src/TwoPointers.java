@@ -4,15 +4,15 @@ import java.util.Map;
 
 public class TwoPointers {
 
-    //LC 977, 189, 283
+    //LC 977, 189, (283, 26) , 167, 26,  344
     public static void main(String[] args) {
 
 
         //int [] nums = {-4,-1,0,3,10};
         //System.out.println(Arrays.toString(sortedSquares(nums)));
 
-        int [] nums = {1,2,3,4,5,6,7};
-        rotate(nums, 3);
+        //int [] nums = {1,2,3,4,5,6,7};
+        //rotate(nums, 3);
 
         int[] numZero = {0,1,0,3,12};
         //reverseArray(numZero, 0, numZero.length-1);
@@ -21,7 +21,15 @@ public class TwoPointers {
 
         //moveZerosKeepOrder(numZero);
 
-        System.out.println(Arrays.toString(twoSums(new int[]{2,7,11,15}, 9)));
+        //System.out.println(Arrays.toString(twoSums(new int[]{2,7,11,15}, 9)));
+
+//        int[] nums = {0,1,1,2,3,3,4,4,5,6,7,7,9};
+//        System.out.println(removeDuplicates(nums));
+
+        char[] s = {'h','e','l','l','o'};
+
+        reverString(s);
+        reverseStringSimple(s);
 
 
     }
@@ -153,7 +161,7 @@ public class TwoPointers {
 
 
 
-        //right keep moving, left is used to mark where the zeros are;
+        //right keep moving, left is used to mark where the zeros are; nums[left] will always be 0 in this logic
         while (right < nums.length)
         {
 
@@ -244,6 +252,68 @@ public class TwoPointers {
         }
 
         return new int[]{0, 0};
+
+    }
+
+    //LC 26 Remove duplicates
+    //Return how many unique number in the array.
+    private static int removeDuplicates(int[] nums)
+    {
+        int right = 1;
+        int left = 0;
+
+        while (right < nums.length)
+        {
+            if (nums[right] != nums[left])
+            {
+                left++;
+                nums[left] = nums[right];
+                right++;
+            }
+            else
+            {
+                right++;
+            }
+
+
+        }
+
+        return ++left;
+
+
+    }
+
+
+    // lc 344
+    private static void reverString(char[] s)
+    {
+        int right = s.length-1;
+        int left = 0;
+        char temp = ' ';
+
+        while (right > left)
+        {
+            temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            right--;
+            left++;
+        }
+        System.out.println(s);
+    }
+
+    // lc 344
+    private static void reverseStringSimple (char[] s)
+    {
+        char temp = ' ';
+        for (int i =0;  i< s.length/2; i++)
+        {
+            temp = s[i];
+            s[i] = s[s.length - 1 - i];
+            s[s.length-1-i] = temp;
+        }
+
+        System.out.println(s);
 
     }
 }
