@@ -15,7 +15,20 @@ public class assessment {
 
 
         //check if any two number added up to be the desired
-        System.out.println(Arrays.toString(getDesiredNumber(arrInt, desiredNum)));
+      //  System.out.println(Arrays.toString(getDesiredNumber(arrInt, desiredNum)));
+
+        Map <Integer, Integer> numbers = new HashMap<>();
+
+        for (int i = 0; i < arrInt.length; i++)
+        {
+            if (numbers.containsKey(desiredNum-arrInt[i]))
+            {
+                System.out.println("found" + (desiredNum - arrInt[i]) + " and " + arrInt[i]);
+            }else
+            {
+                numbers.put(arrInt[i], i);
+            }
+        }
 
 
     }

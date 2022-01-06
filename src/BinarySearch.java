@@ -5,9 +5,9 @@ public class BinarySearch {
         int target = 7;
         //System.out.println(search(nums, target));
 
-//        System.out.println(firstBadVersion(10));
+       System.out.println(firstBadVersion(3));
 
-        System.out.println(searchInsert(nums, target));
+       // System.out.println(searchInsert(nums, target));
 
 
     }
@@ -74,7 +74,7 @@ public class BinarySearch {
 
     private static boolean isBadVersion(int mid) {
 
-        if (mid >= 4)
+        if (mid >= 1)
         {
             return true;
         }

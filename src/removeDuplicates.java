@@ -44,11 +44,68 @@ public class removeDuplicates {
         int[] nums = {1,2,2,2,3,3,4,5,7,7,9,10,11,13,13,16,19,20};
         //System.out.println(Arrays.toString(removeDuplicates(nums)));
         System.out.println(Arrays.toString(findDupllicates(nums)) );
+        System.out.println(Arrays.toString(removeDuplicatesWithList(nums)));
+        System.out.println(Arrays.toString(findDuplicatesWithList(nums)));
 
     }
 
     private static void getWords(String sentence) {
         Arrays.asList(sentence.split("[ ,;.!?]")).stream().forEach(s -> System.out.print(s));
+
+    }
+
+
+    private static int[] removeDuplicatesWithList (int[] nums)
+    {
+
+        List<Integer> unique = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i ++)
+        {
+            if (!unique.contains(nums[i]))
+            {
+                unique.add(nums[i]);
+            }
+        }
+
+        int [] result = unique.stream().mapToInt(i -> i).toArray();
+
+        return result;
+
+
+
+    }
+
+    private static int[] findDuplicatesWithList(int[] nums)
+    {
+        List <Integer> duplicates = new ArrayList<>();
+
+        Map<Integer, Integer> duplicate = new HashMap<>();
+
+
+
+        for (int i = 0; i < nums.length; i++)
+        {
+            if (!duplicate.containsKey(nums[i]))
+            {
+                duplicate.put(nums[i], 1);
+            }
+            else{
+                duplicate.computeIfPresent(nums[i], (k,v) -> v+1);
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry: duplicate.entrySet())
+        {
+            if (entry.getValue() > 1)
+            {
+                duplicates.add(entry.getKey());
+            }
+        }
+
+        int [] result = duplicates.stream().mapToInt(i -> i ).toArray();
+
+        return result;
 
     }
 
