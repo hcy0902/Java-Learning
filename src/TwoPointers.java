@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TwoPointers {
 
@@ -8,11 +6,21 @@ public class TwoPointers {
     public static void main(String[] args) {
 
 
-        //int [] nums = {-4,-1,0,3,10};
-        //System.out.println(Arrays.toString(sortedSquares(nums)));
+//        int [] nums = {-4,-1,0,3,10};
+//        //System.out.println(Arrays.toString(sortedSquares(nums)));
+//        System.out.println(Arrays.toString(sortedSquaresRewind(nums)));
 
-        //int [] nums = {1,2,3,4,5,6,7};
-        //rotate(nums, 3);
+//        int [] nums = {1,2,3,4,5,6,7};
+//        //rotate(nums, 3);
+//        rotateRewind(nums, 3);
+
+        String words = "Let's take LeetCode contest";
+        System.out.println(reverseWords(words));
+
+
+
+
+
 
         int[] numZero = {0,1,0,3,12};
         //reverseArray(numZero, 0, numZero.length-1);
@@ -26,10 +34,10 @@ public class TwoPointers {
 //        int[] nums = {0,1,1,2,3,3,4,4,5,6,7,7,9};
 //        System.out.println(removeDuplicates(nums));
 
-        char[] s = {'h','e','l','l','o'};
-
-        reverString(s);
-        reverseStringSimple(s);
+//        char[] s = {'h','e','l','l','o'};
+//
+//        reverString(s);
+//        reverseStringSimple(s);
 
 
     }
@@ -44,7 +52,7 @@ public class TwoPointers {
 
         int[] results = new int[nums.length];
 
-        while (right > left)
+        while (right >= left)
         {
             int leftVal = Math.abs(nums[left]);
             int rightVal = Math.abs(nums[right]);
@@ -54,7 +62,7 @@ public class TwoPointers {
                 results[result] = nums[right]*nums[right];
                 right--;
             }
-            else if (leftVal > rightVal)
+            else
             {
                 results[result] = nums[left]*nums[left];
                 left++;
@@ -64,6 +72,42 @@ public class TwoPointers {
 
         return results;
     }
+
+    //LC 977 Rewind
+    public static int[] sortedSquaresRewind (int[] nums)
+    {
+
+        int [] results = new int[nums.length];
+        int left = 0;
+        int right = nums.length-1;
+        int result = results.length-1;
+        while (right >= left)
+        {
+            int leftVal = nums[left]*nums[left];
+            int rightVal = nums[right]* nums[right];
+            if (leftVal > rightVal)
+            {
+                results[result] = leftVal;
+                left++;
+            }else
+            {
+                results[result] = rightVal;
+                right--;
+
+            }
+            result--;
+
+        }
+
+
+
+
+        return results;
+    }
+
+
+
+
 
     //LC 189  rotate an array to right with k steps, k>0
 
@@ -85,6 +129,38 @@ public class TwoPointers {
 
         System.out.println(Arrays.toString(nums));
     }
+
+    // LC 189 Rewind
+    public static void rotateRewind (int [] nums, int k )
+    {
+        // just in case k is greater than the length of nums
+        k = k % nums.length;
+        // in order to rotate k steps, need to reverse 3 times
+        reverseRewind(nums,0, nums.length-1);
+        reverseRewind(nums, 0, k-1);
+        reverseRewind(nums, k, nums.length-1);
+
+        System.out.println(Arrays.toString(nums));
+
+
+    }
+
+    public static void reverseRewind (int [] nums, int start, int end)
+    {
+
+        int temp = 0;
+        while (end > start)
+        {
+            temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            end--;
+            start++;
+        }
+
+
+    }
+
 
     private static void reverse(int[] nums, int start, int end) {
 
@@ -315,5 +391,25 @@ public class TwoPointers {
 
         System.out.println(s);
 
+    }
+
+    //lc 557 Reverse words in a String keep spaces and word order
+    private static String reverseWords(String s)
+    {
+        StringBuilder result = new StringBuilder();
+
+        String[] words = s.split(" ");
+
+        for (String word : words)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.append(word);
+            sb.reverse();
+
+            result.append(sb);
+            result.append(" ");
+        }
+
+        return result.toString().strip();
     }
 }
