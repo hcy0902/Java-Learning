@@ -43,8 +43,27 @@ public class TwoPointers {
     }
 
 
+
+
     //LC 977  Using two pointer,  With a sorted int array, return sorted squares of int array
     public static int[] sortedSquares(int[] nums) {
+
+
+        LinkedList<Integer> linky = new LinkedList<>();
+
+        linky.add(78);
+        linky.add(28);
+        linky.add(9);
+
+        Iterator it = linky.iterator();
+
+        while(it.hasNext())
+        {
+            if ((int) it.next() == 78)
+            {
+                System.out.println(78);
+            }
+        }
 
         int left = 0;
         int right = nums.length-1;
