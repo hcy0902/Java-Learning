@@ -8,7 +8,7 @@ public class IndexOfPractice {
 //        System.out.println(strStr(haystack, needle));
 //        System.out.println(haystack.indexOf(needle));
 //        System.out.println(haystack.indexOf(needle, i));
-        System.out.println(occurence(haystack, needle));
+        System.out.println(occurenceRewind(haystack, needle));
 
     }
 
@@ -31,6 +31,30 @@ public class IndexOfPractice {
 
     }
 
+
+
+    private static int occurenceRewind (String haystack, String needle)
+    {
+
+        int start = 0;
+        int found =0;
+        int counter = 0;
+
+        while(true)
+        {
+            found = haystack.indexOf(needle, start);
+            if (found == -1)
+            {
+                break;
+            }
+            start = found + needle.length();
+            counter++;
+        }
+
+        return counter;
+
+
+    }
 
     private static int strStr(String haystack, String needle) {
 

@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkyList {
 
 
-    //lc 19, 876
+    //lc 19, 876, 206
     public static void main(String[] args) {
-
-
+        int number = 8;
+        System.out.println( number % 2 == 0 );
 
     }
 
@@ -78,6 +81,7 @@ public class LinkyList {
             end = end.next;
         }
 
+
         // now end is the node before the target node
         // check the target node, if it is null, return null
         if (end.next == null)
@@ -117,11 +121,127 @@ public class LinkyList {
 
     }
 
-    public class ListNode {
+    //LC 206 Reverse a Linked List
+    private static ListNode reverseLinkedList (ListNode head)
+    {
+        //Two pointers, one is prev, one is current
+        // initialize Prev to be null, current to be head
+        ListNode prev = null;
+        ListNode current = head;
+
+        while(current != null)
+        {
+            //we want to change the next node after current to be the prev. first we store the next node
+            ListNode next = current.next;
+
+            //change next node to be prev
+            current.next = prev;
+            //move prev to be current
+            prev = current;
+            // move current to be next
+            current = next;
+
+        }
+
+        return prev;
+
+    }
+
+    public static class ListNode {
      int val;
       ListNode next;
       ListNode() {}
      ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  }
+
+    //LC 234 Palindrome LinkedList
+    private boolean palindrome (ListNode head)
+    {
+
+        //create  a list to store all values from nodes
+        List<Integer> values = new ArrayList<>();
+        while (head != null)
+        {
+            values.add(head.val);
+            head = head.next;
+        }
+
+        //now list has all values, we wanna loop trough it check from back to start
+        for (int i =0; i< values.size(); i++)
+        {
+            if (values.get(i) != values.get(values.size() -i -1))
+            {
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    //LC 21 Merge two linkedList
+
+    private static ListNode mergeTwo(ListNode list1, ListNode list2)
+    {
+        //declare a new LinkedList here, make the head
+        ListNode merge = new ListNode();
+        ListNode head = merge;
+        //Since two list can be different length, first, we add how ever much we can
+
+        while(list1 != null && list2 != null)
+        {
+            if (list1.val < list2.val)
+            {
+                head.next = list1;
+                list1 = list1.next;
+                head = head.next;
+
+            }
+            else
+            {
+                head.next = list2;
+                list2 = list2.next;
+                head = head.next;
+            }
+
+        }
+
+        // after add all elements of the short list, we determine which one is longer, and add the rest
+        head.next = list1 ==null?list2:list1;
+
+        //and we return the merge.next since it started with head.next
+        return merge.next;
+    }
+
+    //21 Merge two LinkedList rewind
+    private static ListNode mergeTwoRewind (ListNode list1, ListNode list2)
+    {
+        ListNode merge = new ListNode();
+        ListNode head = merge;
+
+        while(list1 != null && list2 != null)
+        {
+            if(list1.val < list2.val)
+            {
+                head.next = list1;
+                list1 = list1.next;
+                head = head.next;
+            }
+            else
+            {
+                head.next = list2;
+                list2 = list2.next;
+                head = head.next;
+            }
+        }
+
+        // now determine which list has anything left to be added
+        head.next = list1==null?list2:list1;
+
+        return merge.next;
+
+    }
+
 }

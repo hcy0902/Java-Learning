@@ -1,42 +1,50 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+
+//LC 20
 public class SpecialChar {
 
 
     public static void main(String[] args) {
-        System.out.println(isValid("({)}"));
+        System.out.println(isValid("(){}[]"));
     }
 
     public static boolean isValid(String s) {
 
-        for (int i = 0; i < s.length(); i++)
+       Map<Character, Character> paris = new HashMap<>();
+
+       paris.put(')', '(');
+        paris.put(']', '[');
+        paris.put('}', '{');
+
+        Stack<Character> open = new Stack<>();
+
+        for (int i =0; i < s.length(); i++)
         {
-            if (s.charAt(i) == '(')
+            char temp = s.charAt(i);
+            if (temp == '(' || temp == '[' || temp == '{')
             {
-                if (!(s.charAt(i+1) == ')'))
+                open.push(temp);
+            }
+            else
+            {
+                if (paris.get(temp) != open.pop())
                 {
                     return false;
                 }
 
             }
 
-            if (s.charAt(i) == '[')
-            {
-                if (!(s.charAt(i+1) == ']'))
-                {
-                    return false;
-                }
 
-            }
-            if (s.charAt(i) == '{')
-            {
-                if (!(s.charAt(i+1) == '}'))
-                {
-                    return false;
-                }
-
-            }
         }
 
-        return true;
+        if (open.size() == 0)
+        {
+            return true;
+        }
+        return false;
 
     }
 }
