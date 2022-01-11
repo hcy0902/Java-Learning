@@ -44,7 +44,6 @@ public class TwoPointers {
 
 
 
-
     //LC 977  Using two pointer,  With a sorted int array, return sorted squares of int array
     public static int[] sortedSquares(int[] nums) {
 

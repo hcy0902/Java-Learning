@@ -159,10 +159,41 @@ public class BFSandDFS {
     }
 
 
+    //LC617 Merge 2 binary trees
+    public static TreeNode mergeBinaryTrees(TreeNode root1, TreeNode root2)
+    {
+        //first pick one root to be the main root to record the result
+        //pick root1
+
+        if (root1 == null)
+        {
+            return root2;
+        }
+
+        if (root2 == null)
+        {
+            return root1;
+        }
+
+        // If both have value, add up and store to root1
+        root1.val += root2.val;
+
+        //call recursively
+        root1.right = mergeBinaryTrees(root1.right, root2.right);
+        root1.left = mergeBinaryTrees(root1.left, root2.left);
+
+
+        return root1;
+
+    }
+
+
+
 
 
 
     class Node {
+
         public int val;
         public List<Node> children;
 
@@ -177,4 +208,17 @@ public class BFSandDFS {
             children = _children;
         }
     }
+
+    public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
 }
