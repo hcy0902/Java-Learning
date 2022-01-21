@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Practice {
 
     public static void main(String[] args) {
@@ -5,6 +8,8 @@ public class Practice {
 
 //        int[] nums = {0,0,1,1,1,2,2,3,3,4};
 //        System.out.println(removeDuplicates(nums));
+        //System.out.println(reverseInt(1234));
+        System.out.println(singleNumber(new int[]{4, 1, 2, 1, 2}));
 
     }
 
@@ -56,5 +61,54 @@ public class Practice {
         }
 
         return ++left;
+    }
+
+    public static int reverseInt (int n)
+    {
+        int answer = 0;
+        while (n > 0)
+        {
+            answer = answer *10 + n % 10;
+            n/= 10;
+        }
+
+
+        return answer;
+    }
+
+    public static int singleNumber(int[] nums) {
+
+        if (nums.length == 1)
+        {
+            return nums[0];
+        }
+
+        Map<Integer, Integer> numbers = new HashMap();
+
+        for(int i = 0; i < nums.length; i ++)
+        {
+            if (!numbers.containsKey(nums[i]))
+            {
+                numbers.put(nums[i], 1 );
+
+            }else
+            {
+                numbers.put(nums[i], 2);
+            }
+        }
+        int answer = 0;
+
+        for (Map.Entry<Integer, Integer> entry : numbers.entrySet())
+        {
+            if (entry.getValue() == 1)
+            {
+                answer = entry.getKey();
+            }
+        }
+
+
+
+        return answer;
+
     }
 }
