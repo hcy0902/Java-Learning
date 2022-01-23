@@ -9,7 +9,9 @@ public class Practice {
 //        int[] nums = {0,0,1,1,1,2,2,3,3,4};
 //        System.out.println(removeDuplicates(nums));
         //System.out.println(reverseInt(1234));
-        System.out.println(singleNumber(new int[]{4, 1, 2, 1, 2}));
+        //System.out.println(singleNumber(new int[]{4, 1, 2, 1, 2}));
+
+        findMin(new int[]{3,1,2});
 
     }
 
@@ -109,6 +111,31 @@ public class Practice {
 
 
         return answer;
+
+    }
+
+
+    public static int findMin(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+
+
+        int left= 0;
+        int right = nums.length-1;
+
+        while(right > left){
+
+            int mid = left + (right-left)/2;
+            if (nums[mid] > nums[right]){
+                left = mid+1;
+            }else{
+                right = mid;
+            }
+        }
+
+
+        return nums[left];
 
     }
 }

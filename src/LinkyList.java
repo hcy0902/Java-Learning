@@ -4,7 +4,7 @@ import java.util.List;
 public class LinkyList {
 
 
-    //lc 19, 876, 206
+    //lc 19, 876, 206, 82, 83
     public static void main(String[] args) {
         int number = 8;
         System.out.println( number % 2 == 0 );
@@ -241,6 +241,58 @@ public class LinkyList {
         head.next = list1==null?list2:list1;
 
         return merge.next;
+
+    }
+
+    // 82 Remove duplicates from a linked list
+
+    public ListNode deleteDuplicates(ListNode head) {
+
+        //Remember to use a prev and a dummy node to store new list
+        // initial dummy node to be value of 0, and next to be head;
+        ListNode dummy = new ListNode(0, head);
+        // prev is used to mark the last seen unique node, we won't update this until we find a new unique
+        ListNode prev = dummy;
+
+        while(head!= null){
+            if (head.next != null && head.val == head.next.val){
+                while(head.next != null && head.val == head.next.val){
+                    //if we find a duplicate, we keep going until we find no more duplicates and break out
+                    head = head.next;
+                }
+                // update prev.next to the next (which is unique)
+                prev.next = head.next;
+            }else{
+                //if we don't find a duplicate, update prev
+                prev = prev.next;
+            }
+            // keep going no matter what
+            head = head.next;
+        }
+
+        return dummy.next;
+
+
+    }
+
+    // LC 83 this is different from 82, if there are duplicates, we keep one
+
+    public ListNode deleteDuplicates2(ListNode head) {
+
+        ListNode current = head;
+
+
+        while(current != null){
+            if (current.next != null && current.val == current.next.val){
+                // if we find a duplicate, we skip the next, update to the next after the next
+                current.next = current.next.next;
+            }else{
+                // we won't update the current until we find a different node
+                current = current.next;
+            }
+        }
+
+        return head;
 
     }
 

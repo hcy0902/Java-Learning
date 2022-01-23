@@ -1,5 +1,7 @@
 import java.util.*;
 
+
+
 public class TwoPointers {
 
     //LC 977, 189, (283, 26) , 167, 26,  344
@@ -14,10 +16,12 @@ public class TwoPointers {
 //        //rotate(nums, 3);
 //        rotateRewind(nums, 3);
 
-        String words = "Let's take LeetCode contest";
-        System.out.println(reverseWords(words));
+//        String words = "Let's take LeetCode contest";
+//        System.out.println(reverseWords(words));
 
+        System.out.println(backSpaceCompareSkip("y#fo##f", "y#f#o##f"));
 
+        //System.out.println(threeSum(new int[] {-1,0,1,2,-1,-4}));
 
 
 
@@ -430,4 +434,146 @@ public class TwoPointers {
 
         return result.toString().strip();
     }
+
+
+
+    //LC 844
+    public static boolean backspaceCompare(String s, String t) {
+
+
+        StringBuilder newS = new StringBuilder();
+        StringBuilder newT = new StringBuilder();
+
+        char[] sChars  = s.toCharArray();
+        char[] tChars = t.toCharArray();
+
+        for (char c:sChars){
+            if (c == '#' ){
+                if (newS.length()>=1){
+                    newS.deleteCharAt(newS.length()-1);
+                }
+            }else{
+                newS.append(c);
+            }
+        }
+
+        for (char c:tChars){
+            if (c == '#'){
+                if (newT.length()>=1) {
+                    newT.deleteCharAt(newT.length() - 1);
+                }
+            }else{
+                newT.append(c);
+            }
+        }
+
+        if (newS.toString().equals(newT.toString())){
+            return true;
+        }
+
+        return false;
+
+    }
+
+    ////LC 844 using skip method
+
+    public static boolean backSpaceCompareSkip(String s, String t){
+
+        return build(s).equals(build(t));
+
+    }
+
+    private static String build(String s) {
+
+        StringBuilder sb = new StringBuilder();
+        int skip = 0;
+
+        for (int i = s.length()-1; i>= 0; i--){
+            char c = s.charAt(i);
+            if (c == '#'){
+                skip++;
+            }else{
+                if(skip >0){
+                    skip--;
+                }else{
+                    sb.append(c);
+                }
+            }
+        }
+        return sb.toString();
+
+    }
+
+
+    //lc 15 3SUM
+
+    public static List<List<Integer>> threeSum(int[] nums) {
+
+        Arrays.sort(nums);
+
+        List<List<Integer>> results = new ArrayList();
+
+
+        List<Integer> seen = new ArrayList();
+
+        for(int i = 0; i < nums.length-2; i++){
+            if (!seen.contains(nums[i])){
+                findTwoSum(results, nums, nums[i], i+1);
+            }
+            seen.add(nums[i]);
+        }
+
+        return results;
+
+
+    }
+
+    public static void findTwoSum(List<List<Integer>> results, int[] nums, int num, int index){
+
+
+        int target = 0 - num;
+
+        int left = index;
+        int right = nums.length-1;
+
+        while(right > left){
+            if (nums[left] + nums[right] == target){
+                results.add(Arrays.asList(nums[left], nums[right], num));
+                while(left < right && nums[left] == nums[left+1]) left++;
+                while(left < right && nums[right] == nums[right-1]) right--;
+                left++;
+                right--;
+            }else if (nums[left]+ nums[right] > target){
+                right--;
+            }else{
+                left++;
+            }
+        }
+        return;
+
+
+    }
+
+    //LC 11 Container of water
+    public int findMaxArea(int[] height){
+
+        int max = 0;
+        int left = 0;
+        int right = height.length-1;
+
+        // two pointer move from each end
+        while(right >left){
+            if (height[right] > height[left]){
+                // area is determined by the shorter side, we wanna move the shorter side to middle
+                max = Math.max(max, height[left]* (right-left));
+                left++;
+            }else{
+                max = Math.max(max, height[right]* (right-left));
+                right--;
+            }
+        }
+
+        return max; 
+    }
+
 }

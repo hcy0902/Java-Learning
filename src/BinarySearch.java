@@ -1,3 +1,7 @@
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
+
 public class BinarySearch {
 
     //LC 704 278, 35, 34, 74, 33, 153, 162
@@ -14,6 +18,109 @@ public class BinarySearch {
        // System.out.println(searchInsert(nums, target));
         int[][] matrix = new int[][] {{1,3,5,7},{10,11,16,20},{23,30,34,60}};
         System.out.println(searchMatrix(matrix, 3));
+
+        Queue<Character> queue = new Queue<>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Character> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Character character) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Character> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                return false;
+            }
+
+            @Override
+            public int hashCode() {
+                return 0;
+            }
+
+            @Override
+            public boolean offer(Character character) {
+                return false;
+            }
+
+            @Override
+            public Character remove() {
+                return null;
+            }
+
+            @Override
+            public Character poll() {
+                return null;
+            }
+
+            @Override
+            public Character element() {
+                return null;
+            }
+
+            @Override
+            public Character peek() {
+                return null;
+            }
+        };
+
 
 
     }
