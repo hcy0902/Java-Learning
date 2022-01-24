@@ -7,7 +7,6 @@ public class TwoPointers {
     //LC 977, 189, (283, 26) , 167, 26,  344
     public static void main(String[] args) {
 
-
 //        int [] nums = {-4,-1,0,3,10};
 //        //System.out.println(Arrays.toString(sortedSquares(nums)));
 //        System.out.println(Arrays.toString(sortedSquaresRewind(nums)));
@@ -503,7 +502,6 @@ public class TwoPointers {
         return sb.toString();
 
     }
-
 
     //lc 15 3SUM
 

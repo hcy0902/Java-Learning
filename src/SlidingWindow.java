@@ -10,13 +10,19 @@ public class SlidingWindow {
     //LC 3
     public static void main(String[] args) {
 
-        //LC3
-        System.out.println(lengthOfLongest("abcabcbb"));
+//        //LC3
+//        System.out.println(lengthOfLongest("abcabcbb"));
+//
+//        //LC567
+//        System.out.println(checkInclusion("adc", "dcda"));
+//
+//        String test = "test";
 
-        //LC567
-        System.out.println(checkInclusion("adc", "dcda"));
+        //System.out.println(findAnagrams( "abab", "ab"));
 
-        String test = "test";
+        //System.out.println(numSubarrayProductLessThanK(new int[]{10,5,2,6}, 100));
+
+        System.out.println(minSubArrayLen(11,  new int[]{1,2,3,4,5}));
 
 
     }
@@ -154,6 +160,121 @@ public class SlidingWindow {
 
         return false;
 
+
+    }
+
+    //LC 438 Find all anagrams in a string
+    public static List<Integer> findAnagrams(String s, String p) {
+
+        p = sortString(p);
+
+        int left = 0;
+        int right = p.length()-1;
+
+        List<Integer> answer = new ArrayList();
+
+        while(right < s.length()){
+
+            String current = sortString(s.substring(left, right+1));
+            if (current.equals(p)){
+                answer.add(left);
+                while (right < s.length()-1 && s.charAt(right+1) ==  s.charAt(left)){
+                    answer.add(left+1);
+                    left++;
+                    right++;
+                }
+            }
+
+            left++;
+            right++;
+        }
+
+        return answer;
+
+    }
+
+    //LC 713
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+
+        int left = 0;
+        int right = left+1;
+
+        int count = 0;
+
+        while(left < nums.length){
+            int product = nums[left];
+
+            if (nums[left] < k){
+                count++;
+            }
+
+            if (right < nums.length && nums[right] * nums[left] < k){
+                product *= nums[right];
+                while(right < nums.length && product < k){
+                    right++;
+                    count++;
+                    if (right < nums.length){
+                        product *= nums[right];
+                    }
+                }
+            }
+            left++;
+            right = left+1;
+
+        }
+
+        return count;
+
+    }
+
+
+
+    //LC 209
+    public static int minSubArrayLen(int target, int[] nums) {
+
+        int left = 0;
+        int right = left+1;
+
+        int length = nums.length+1;
+
+        while(left < nums.length){
+            int currentLength = 0;
+            int sum = nums[left];
+            if (nums[left] >=  target){
+                return 1;
+            }
+
+            if (right < nums.length){
+                sum += nums[right];
+            }
+
+            if (right < nums.length && sum < target){
+                while(right < nums.length && sum < target){
+                    right++;
+                    if (right < nums.length){
+                        sum += nums[right];
+                    }
+                }
+            }
+
+            if (sum >= target){
+                currentLength =  right - left + 1;
+            }
+
+
+            if (currentLength != 0){
+                length = Math.min(length, currentLength);
+            }
+
+            left++;
+            right = left+1;
+
+        }
+
+        if (length <= nums.length){
+            return length;
+        }
+        return 0;
 
     }
 
