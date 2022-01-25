@@ -3,6 +3,8 @@ import java.util.Queue;
 
 public class MoreBFSandDFW {
 
+
+    //LC 116, 200, 547
     public static void main(String[] args) {
 
     }
@@ -105,6 +107,81 @@ public class MoreBFSandDFW {
             right = _right;
             next = _next;
         }
+    }
+
+    //LC 200 Number of Islands
+    boolean seen[][];
+    public int numIslands(char[][] grid) {
+
+        int count = 0;
+        seen = new boolean[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++){
+            for (int j = 0; j < grid[0].length; j++){
+                if (grid[i][j] == '1' && !seen[i][j]){
+                    findIslands (grid, i,j );
+                    count++;
+                }
+            }
+
+        }
+
+        return count;
+
+
+    }
+
+    private void findIslands(char[][] grid, int i, int j) {
+        if (i<0 || j<0 || i>= grid.length || j>= grid[0].length || grid[i][j] == '0' || seen[i][j]) {
+            return;
+        }
+
+        seen[i][j] = true;
+
+        findIslands(grid, i+1, j);
+        findIslands(grid, i-1, j);
+        findIslands(grid, i, j+1);
+        findIslands(grid, i, j-1);
+
+    }
+
+
+    //LC 547 Number of provinces
+    boolean visited[];
+    public int findCircleNum(int[][] isConnected) {
+
+        int count = 0;
+        visited = new boolean[isConnected.length];
+        // we wanna first loop through each person
+        for (int i = 0; i < isConnected.length; i++){
+            if (!visited[i]){
+                dfs(isConnected, i);
+                count++;
+            }
+        }
+
+
+        return count;
+
+    }
+
+    private void dfs(int[][] isConnected, int currentPerson) {
+        // if we already visited this person, no need to find his connections
+        if (visited[currentPerson] ){
+            return;
+        }
+
+        visited[currentPerson] = true;
+
+        // loop through this person's connections
+        for (int j = 0; j < isConnected.length; j++){
+            // if that node is 1, means we have a connection, keep finding this connected person's connections
+            if (!visited[j] && isConnected[currentPerson][j] == 1){
+                dfs(isConnected, j);
+            }
+        }
+
+        return;
+
     }
 
 

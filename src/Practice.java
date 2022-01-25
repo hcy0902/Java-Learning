@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Practice {
 
@@ -11,7 +12,9 @@ public class Practice {
         //System.out.println(reverseInt(1234));
         //System.out.println(singleNumber(new int[]{4, 1, 2, 1, 2}));
 
-        findMin(new int[]{3,1,2});
+        //findMin(new int[]{3,1,2});
+
+        calculator();
 
     }
 
@@ -137,5 +140,45 @@ public class Practice {
 
         return nums[left];
 
+    }
+
+    public static void calculator(){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter number 1: ");
+        int number1 = scanner.nextInt();
+
+        System.out.println("Enter number 2: ");
+        int number2 = scanner.nextInt();
+
+        System.out.println("Enter choice 1, 2, 3, or 4: ");
+        int choice = scanner.nextInt();
+
+        while (choice != 1 && choice != 2 && choice !=3 && choice != 4){
+
+            System.out.println("Wrong choice, please enter again, 1, 2, 3, or 4: ");
+            choice = scanner.nextInt();
+
+        }
+        int result = calculate(number1, number2, choice);
+
+        System.out.println("Result is: " + result);
+    }
+
+    public static int  calculate (int number1, int number2, int choice){
+
+        if (choice == 1){
+            return number1 + number2;
+        }else if (choice == 2){
+            return number1 - number2;
+        }else if (choice == 3){
+            return number1 * number2;
+        }else if (choice ==4){
+            return number1 / number2;
+        }
+
+        // think about why I did this hint: try deleting this line, and see what happens
+        return 0;
     }
 }
