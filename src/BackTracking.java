@@ -12,10 +12,7 @@ public class BackTracking {
 //            BackTracking backTracking = new BackTracking();
 //            System.out.println(backTracking.combine(4,2));
 
-            for(int i = 0; i < 10; i +=2)
-            {
-                System.out.println(i);
-            }
+        subsetsWithDup(new int[]{1, 2, 2});
 
     }
 
@@ -192,5 +189,31 @@ public class BackTracking {
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
   }
+
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
+
+        List<List<Integer>> results = new ArrayList();
+
+        List<Integer> result = new ArrayList();
+        dfs(results, result, nums, 0);
+
+        return results;
+    }
+
+    public static void dfs(List<List<Integer>> results, List<Integer> result,int[] nums, int index){
+
+        if (!results.contains(result)){
+            results.add(new ArrayList(result));
+        }else{
+            return;
+        }
+
+
+        for (int i = index; i< nums.length; i++){
+            result.add(nums[i]);
+            dfs(results, result, nums, i+1);
+            result.remove(result.size()-1);
+        }
+    }
 
 }
